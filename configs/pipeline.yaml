@@ -1,0 +1,17 @@
+# Pipeline configuration (paths are relative to the project root; both are git-ignored)
+paths:
+  data_dir: data
+  work_dir: workdir
+  models_dir: models
+
+convert:
+  output_format: nii.gz
+
+segmentation:
+  # nnU-Net v2 dataset/configuration identifiers — set once models are available
+  dataset_id: null
+  configuration: 3d_fullres
+  folds: [0]
+
+report:
+  enabled: true

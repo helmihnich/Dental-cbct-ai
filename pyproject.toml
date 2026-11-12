@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dental-cbct-ai"
+version = "0.1.0"
+description = "CBCT dental pipeline: DICOM -> NIfTI -> nnU-Net tooth/canal segmentation -> heuristic findings report"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "numpy",
+    "pydicom",
+    "SimpleITK",
+    "nibabel",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+seg = ["nnunetv2"]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+dentalcbct = "dentalcbct.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
