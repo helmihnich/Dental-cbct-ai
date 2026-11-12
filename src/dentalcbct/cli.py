@@ -133,6 +133,20 @@ def cmd_doctor(_args: argparse.Namespace) -> int:
     return 1 if failed else 0
 
 
+def cmd_anonymize(args: argparse.Namespace) -> int:
+    from dentalcbct.anonymize import AnonymizeError, anonymize_folder
+
+    try:
+        counts = anonymize_folder(Path(args.input), Path(args.output))
+    except AnonymizeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    print(f"files read:    {counts.read}")
+    print(f"files written: {counts.written}")
+    print(f"files skipped: {counts.skipped}")
+    return 0 if counts.written else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dentalcbct",
@@ -143,6 +157,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     doctor = sub.add_parser("doctor", help="check the environment (GPU, packages, nnU-Net paths)")
     doctor.set_defaults(func=cmd_doctor)
+
+    anon = sub.add_parser(
+        "anonymize",
+        help="copy a DICOM folder with identifying tags blanked and private tags removed",
+    )
+    anon.add_argument("--input", required=True, help="DICOM folder (searched recursively; read-only)")
+    anon.add_argument("--output", required=True, help="new or empty output folder")
+    anon.set_defaults(func=cmd_anonymize)
     return parser
 
 
