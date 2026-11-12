@@ -1,0 +1,40 @@
+# VCS / environments
+.git
+.gitignore
+.venv
+venv
+**/__pycache__
+**/*.py[cod]
+**/*.egg-info
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.vscode
+.idea
+
+# Patient data — never send to the build context
+**/*.dcm
+**/*.DCM
+**/*.dicom
+**/DICOMDIR
+**/*.nii
+**/*.nii.gz
+**/*.nrrd
+**/*.mha
+**/*.mhd
+**/*.xfm
+data
+workdir
+outputs
+
+# Models / weights / archives
+models
+**/nnUNet_*
+**/*.pth
+**/*.pt
+**/*.ckpt
+**/*.onnx
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.7z

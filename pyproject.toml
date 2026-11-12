@@ -7,7 +7,7 @@ name = "dental-cbct-ai"
 version = "0.1.0"
 description = "CBCT dental pipeline: DICOM -> NIfTI -> nnU-Net tooth/canal segmentation -> heuristic findings report"
 readme = "README.md"
-requires-python = ">=3.11,<3.12"
+requires-python = ">=3.11"
 dependencies = [
     "numpy",
     "pydicom",
